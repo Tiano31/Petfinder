@@ -10,7 +10,7 @@ document.getElementById('search').addEventListener('keyup', function(event) {
 document.getElementById('search-btn').addEventListener('click', function() {
     performSearch();
 });
-
+ 
 async function performSearch() {
     const query = document.getElementById('search').value;
     if (query.trim() !== "") {
