@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const artistId = urlParams.get('artistId');
 
     if (artistId) {
-        fetchToken().then(token => {
+        fetchToken().then(token => { 
             fetchArtistInfo(token, artistId);
             fetchTopTracks(token, artistId);
         }).catch(error => {
