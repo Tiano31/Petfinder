@@ -12,19 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }).catch(error => {
             console.error('Error fetching token or artist data:', error);
         });
-
-        const playBtn = document.getElementById('play-btn');
-        const audioPlayer = document.getElementById('audio-player');
-
-        playBtn.addEventListener('click', () => {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-                playBtn.textContent = 'Pause';
-            } else {
-                audioPlayer.pause();
-                playBtn.textContent = 'Play';
-            }
-        });
     } else {
         console.error('No artist ID found in URL');
     }
@@ -72,7 +59,7 @@ function displayArtistInfo(artist) {
     if (artist.images && artist.images.length > 0) {
         artistImage.src = artist.images[0].url;
     } else {
-        artistImage.src = 'default-image.jpg';
+        artistImage.src = 'https://via.placeholder.com/300';  // Placeholder image URL
     }
 }
 
@@ -103,7 +90,6 @@ function displayTopTracks(tracks) {
 
     tracks.forEach(track => {
         const li = document.createElement('li');
-        li.style.cursor = 'pointer';
 
         // Track details
         const trackName = document.createElement('span');
@@ -111,7 +97,7 @@ function displayTopTracks(tracks) {
 
         // Track image
         const trackImage = document.createElement('img');
-        trackImage.src = track.album.images[0]?.url || 'default-track-image.jpg';
+        trackImage.src = track.album.images[0]?.url || 'https://via.placeholder.com/50';
         trackImage.alt = track.name;
         trackImage.style.width = '50px';
         trackImage.style.height = '50px';
@@ -121,18 +107,9 @@ function displayTopTracks(tracks) {
         li.appendChild(trackImage);
         li.appendChild(trackName);
 
-        // Add click event to play track
+        // Add click event to redirect to track page
         li.addEventListener('click', () => {
-            const audioPlayer = document.getElementById('audio-player');
-            if (track.preview_url) {
-                audioPlayer.src = track.preview_url;
-                audioPlayer.play().catch(error => {
-                    console.error('Error playing audio:', error);
-                });
-                document.getElementById('play-btn').textContent = 'Pause';
-            } else {
-                console.warn('No preview URL available for this track');
-            }
+            window.location.href = `https://open.spotify.com/track/${track.id}`; // Redirect to Spotify track page
         });
 
         trackList.appendChild(li);
