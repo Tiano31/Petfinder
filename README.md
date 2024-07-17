@@ -2,7 +2,7 @@ Group Leader:
 Manuel Villanueva
 
 Group Members:
-Jerome Bautista
+Jerome Bautista and 
 Christian Villaveza
 
 
